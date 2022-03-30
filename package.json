@@ -1,0 +1,22 @@
+{
+  "name": "cloudcomputingass1",
+  "version": "1.0.0",
+  "description": "A cloud based Google Cloud Platform project for my university assignment",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/verilye/CloudComputingAss1.git"
+  },
+  "author": "Connor Logan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/verilye/CloudComputingAss1/issues"
+  },
+  "homepage": "https://github.com/verilye/CloudComputingAss1#readme",
+  "dependencies": {
+    "express": "^4.17.3"
+  }
+}
