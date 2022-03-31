@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/verilye/CloudComputingAss1#readme",
   "dependencies": {
-    "express": "^4.17.3"
+    "@google-cloud/storage": "^5.18.3",
+    "express": "^4.17.3",
+    "firebase": "^9.6.10"
   }
 }
