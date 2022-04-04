@@ -1,0 +1,15 @@
+extends layout 
+
+block content
+  div 
+    .title
+      h1 Register an account
+    .register-form
+      form(action='/register/add' method='post')
+        input(type='text' name='id' placeholder='ID' required='')
+        input(type='text' name='user_name' placeholder='User Name' required='')
+        input(type='text' name='password' placeholder='Password' required='')
+        input.register-button(type='submit' value='Register')
+    .error-message #{error}
+    .login-prompt
+      a(href='/') Go back to login 

@@ -12,15 +12,15 @@ router.get('/', async (req,res) => {
   
 router.get('/login', async (req,res)=>{
 
-const db = getFirestore();
+  const db = getFirestore();
 
-const idRef = db.collection('users').doc(req.query.id);
-const doc = await idRef.get();
-if (!doc.exists) {
-console.log('No such document!');
-} else {
-console.log('Document data:', doc.data());
-}
-});
+  const idRef = db.collection('users').doc(req.query.id);
+  const doc = await idRef.get();
+  if (!doc.exists) {
+    res.render('login', {error: "ID or password is invalid"});
+  } else {
+    res.render('forum');
+  }
+  });
 
 module.exports = router;

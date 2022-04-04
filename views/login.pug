@@ -7,10 +7,11 @@ block content
       h3 With Google Firestore and Google Cloud Storage
     .login-form
       form(action='/login' method='get')
-        input(type='text' name='id' required='')
-        input(type='text' name='user_name' required='')
-        input(type='text' name='password' required='')
+        input(type='text' name='id' required='' placeholder='ID')
+        input(type='text' name='user_name' required='' placeholder='Username')
+        input(type='text' name='password' required='' placeholder='Password')
         input.login-button(type='submit' value='Login')
+    .error-message #{error}
     .register-prompt
       a(href='/register') Dont have an account? Click here to register
     |   Connor Logan, s3768929
