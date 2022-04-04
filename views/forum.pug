@@ -1,0 +1,14 @@
+div
+  .user-area
+    a(href='/forum') Display user name
+    p Display user image
+  .message-posting-area
+    .forum-post-form
+      form(method='POST')
+        input(type='text' name='subject' placeholder='Subject' required='')
+        input(type='text' name='msg-text' placeholder='Message text' required='')
+        input(type="file" id="photo")
+        button.photo-button(onclick="uploadImage()") Upload Image
+        input.submit-button(type='submit' value='Submit')
+  .message-display-area
+    p For message in messages display 10

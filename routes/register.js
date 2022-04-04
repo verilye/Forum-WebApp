@@ -2,6 +2,15 @@ const { initializeApp, applicationDefault, cert } = require('firebase-admin/app'
 const { getFirestore, Timestamp, FieldValue } = require('firebase-admin/firestore');
 const express = require('express');
 const router = express.Router();
+const {Storage} = require('@google-cloud/storage');
+const bodyParser = require('body-parser')
+
+const storage = new Storage();
+
+router.use(bodyParser.urlencoded({
+      extended: true
+    }));
+
 
 router.get('/', async (req,res) => {
 
@@ -9,14 +18,15 @@ router.get('/', async (req,res) => {
 });
 
 router.post('/add', async (req,res)=>{
+
       
-      console.log(req);
 
       const db = getFirestore();
       const idRef = db.collection('users');
 
       try{
 
+            console.log(req.body);
             const id = await idRef.doc(req.body.id).get();
 
             if (!id.exists) {
@@ -52,5 +62,6 @@ router.post('/add', async (req,res)=>{
       }catch(err) { res.send(console.log(err))};
       
 });
+
 
 module.exports = router;
