@@ -1,9 +1,15 @@
 const db = require('../startup/database'); 
 const {doc, getDoc, getDocs , where, query, collection, setDoc} = require('firebase/firestore');
 const express = require('express');
+const multer = require('multer');
+const {addImage} = require('./addImage');
 const router = express.Router();
 const {Storage} = require('@google-cloud/storage');
 const bodyParser = require('body-parser')
+
+const storage = multer.memoryStorage();
+
+const upload = multer({ storage: storage });
 
 router.use(bodyParser.urlencoded({
       extended: true
@@ -15,7 +21,7 @@ router.get('/', async (req,res) => {
       res.render('register');
 });
 
-router.post('/add', async (req,res)=>{
+router.post('/add', upload.single('file'), addImage, async (req,res)=>{
 
       try{
             
@@ -27,7 +33,7 @@ router.post('/add', async (req,res)=>{
                   
                   const user = await getDocs(q);
 
-                  if(!user.exists){
+                  if(user.exists){
 
 
                         await setDoc(doc(db, "users", req.body.id),{
