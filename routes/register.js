@@ -1,11 +1,9 @@
-const { initializeApp, applicationDefault, cert } = require('firebase-admin/app');
-const { getFirestore, Timestamp, FieldValue } = require('firebase-admin/firestore');
+const db = require('../startup/database'); 
+const {doc, getDoc, getDocs , where, query, collection, setDoc} = require('firebase/firestore');
 const express = require('express');
 const router = express.Router();
 const {Storage} = require('@google-cloud/storage');
 const bodyParser = require('body-parser')
-
-const storage = new Storage();
 
 router.use(bodyParser.urlencoded({
       extended: true
@@ -19,28 +17,20 @@ router.get('/', async (req,res) => {
 
 router.post('/add', async (req,res)=>{
 
-      
-
-      const db = getFirestore();
-      const idRef = db.collection('users');
-
       try{
-
             
-            const id = await idRef.doc(req.body.id).get();
+            const idRef = doc(db, 'users', req.body.id);
+            const id = await getDoc(idRef);
 
-            if (!id.exists) {
-
-                  const userQuery = idRef.where('user_name', '==', req.body.user_name).get();
-
-                  const user = await userQuery;
-
+            if (id.exists) {
+                  const q = query(collection (db, 'users'), where("user_name", "==", req.body.user_name));
                   
+                  const user = await getDocs(q);
 
                   if(!user.exists){
 
 
-                        db.collection("users").doc(req.body.id).set({
+                        await setDoc(doc(db, "users", req.body.id),{
                               password: req.body.password,
                               user_name: req.body.user_name   
                         })
