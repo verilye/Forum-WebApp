@@ -26,7 +26,7 @@ router.post('/add', async (req,res)=>{
 
       try{
 
-            console.log(req.body);
+            
             const id = await idRef.doc(req.body.id).get();
 
             if (!id.exists) {
@@ -35,29 +35,27 @@ router.post('/add', async (req,res)=>{
 
                   const user = await userQuery;
 
-                  console.log("bing");
+                  
 
                   if(!user.exists){
 
-                        console.log("bong");
 
                         db.collection("users").doc(req.body.id).set({
                               password: req.body.password,
                               user_name: req.body.user_name   
                         })
 
-                        console.log("bung");
+                        
 
-                        res.render('register', {error: "USER SUCCESSFULLY CREATED!"});
+                        res.render('login', {error: "USER SUCCESSFULLY CREATED!"});
 
                   }else{
                         res.render('register', {error: "Username already exists"});
-                        console.log("2");
+            
                   }
 
             } else {
                   res.render('register', {error: "ID already exists"});
-                  console.log("1");
             }
       }catch(err) { res.send(console.log(err))};
       

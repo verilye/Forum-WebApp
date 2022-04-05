@@ -1,6 +1,7 @@
 const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
+const db = require('./startup/database');
 
 const app = express();
 
@@ -14,7 +15,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set("view engine", "pug");
 
 
-require('./startup/database')();
+require('./startup/database');
 require('./startup/routes')(app);
 
 

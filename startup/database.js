@@ -1,9 +1,6 @@
-const { initializeApp, applicationDefault, cert } = require('firebase-admin/app');
-const { getFirestore, Timestamp, FieldValue } = require('firebase-admin/firestore');
+const { initializeApp, applicationDefault } = require ('firebase/app');
+const { getFirestore, collection, getDocs } = require ('firebase/firestore/lite');
 
-
-module.exports = function(){
-  
   const firebaseConfig = {
   
     apiKey: "AIzaSyDD0kOj1Ha0FH9Z0paxKkU5Zv5tT4DRC5A",
@@ -18,12 +15,16 @@ module.exports = function(){
   
     appId: "1:482654940770:web:bfe62a75012e3fbb396b3b",
 
-    credential: applicationDefault()
+    credential: applicationDefault
   
   };
 
   const app = initializeApp(firebaseConfig);
 
-  const db = getFirestore();
+  const db = getFirestore(app);
 
-}
+
+  module.exports = db;
+
+
+
