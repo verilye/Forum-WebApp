@@ -1,15 +1,11 @@
 const path = require('path');
 const express = require('express');
-const bodyParser = require('body-parser');
-const db = require('./startup/database');
 
 const app = express();
 
 app.use(express.static(__dirname));
 
-app.use(bodyParser.urlencoded({
-  extended: true
-}));
+app.use(express.json());
 
 app.set('views', path.join(__dirname, 'views'));
 app.set("view engine", "pug");

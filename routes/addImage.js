@@ -1,10 +1,10 @@
 const firebase = require('../startup/database'); 
-const {getStorage, ref, uploadString} =require("firebase/storage"); 
+const {getStorage, ref, uploadString, getDownloadURL} =require("firebase/storage"); 
 const storage = getStorage();
 const storageRef = ref(storage); 
 const folderRef = ref(storageRef, 'images');
 global.XMLHttpRequest = require("xhr2"); 
-const addImage = async (req, res) => {
+const addImage = async (req, res, next) => {
     try {
         
         const file = req.file;        
@@ -17,8 +17,14 @@ const addImage = async (req, res) => {
         const snapshot = uploadString(imageRef, message).then((snapshot) => {
                 console.log("Uploaded a string");
             })
+
+        url = getDownloadURL(starsRef);
         
-        res.send("Uploaded");
+        await setDoc(doc(db, "users", req.body.id),{
+           pic: url  
+          });
+        
+            res.render('login', {error: "USER SUCCESSFULLY CREATED!"});
     }  catch (error) {
         console.log (error)
         res.status(400).send(error.message);

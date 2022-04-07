@@ -1,15 +1,16 @@
-const db = require('../startup/database'); 
-const {doc, getDoc, getDocs , where, query, collection, setDoc} = require('firebase/firestore');
 const express = require('express');
 const multer = require('multer');
 const {addImage} = require('./addImage');
 const router = express.Router();
-const {Storage} = require('@google-cloud/storage');
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
+const { registerUser } = require('./registerUser');
+global.XMLHttpRequest = require("xhr2"); 
 
 const storage = multer.memoryStorage();
 
-const upload = multer({ storage: storage });
+const upload = multer({ storage: storage }).single('file');
+
+router.use(express.json());
 
 router.use(bodyParser.urlencoded({
       extended: true
@@ -21,41 +22,7 @@ router.get('/', async (req,res) => {
       res.render('register');
 });
 
-router.post('/add', upload.single('file'), addImage, async (req,res)=>{
-
-      try{
-            
-            const idRef = doc(db, 'users', req.body.id);
-            const id = await getDoc(idRef);
-
-            if (id.exists) {
-                  const q = query(collection (db, 'users'), where("user_name", "==", req.body.user_name));
-                  
-                  const user = await getDocs(q);
-
-                  if(user.exists){
-
-
-                        await setDoc(doc(db, "users", req.body.id),{
-                              password: req.body.password,
-                              user_name: req.body.user_name   
-                        })
-
-                        
-
-                        res.render('login', {error: "USER SUCCESSFULLY CREATED!"});
-
-                  }else{
-                        res.render('register', {error: "Username already exists"});
-            
-                  }
-
-            } else {
-                  res.render('register', {error: "ID already exists"});
-            }
-      }catch(err) { res.send(console.log(err))};
-      
-});
+router.post('/add', upload, registerUser, addImage);
 
 
 module.exports = router;
