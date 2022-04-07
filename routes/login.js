@@ -36,7 +36,7 @@ router.get('/login', async (req,res)=>{
   
   }else{
 
-    res.render('forum');
+    res.render('forum', {user_name: docSnap.data().user_name, pic: docSnap.data().pic});
   }
   });
 

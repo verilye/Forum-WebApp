@@ -1,4 +1,5 @@
-const firebase = require('../startup/database'); 
+const db = require('../startup/database'); 
+const {doc, updateDoc} = require('firebase/firestore');
 const {getStorage, ref, uploadString, getDownloadURL} =require("firebase/storage"); 
 const storage = getStorage();
 const storageRef = ref(storage); 
@@ -13,18 +14,28 @@ const addImage = async (req, res, next) => {
         const type = file.originalname.split(".")[1];
         const fileName = `${name}_${timestamp}.${type}`;        
         const imageRef = ref(folderRef,fileName); 
-        const message =name;
-        const snapshot = uploadString(imageRef, message).then((snapshot) => {
-                console.log("Uploaded a string");
-            })
 
-        url = getDownloadURL(starsRef);
+        const metadata ={
+            contentType: 'image/jpeg',
+        };
+
+        const snapshot = uploadString(imageRef,metadata).then((snapshot) => {
+               
+            const url = getDownloadURL(imageRef).then((url) => {
+            
+                updateDoc(doc(db, "users", req.body.id),{
+                    pic: url  
+                    });
+            });
+        });
         
-        await setDoc(doc(db, "users", req.body.id),{
-           pic: url  
-          });
         
-            res.render('login', {error: "USER SUCCESSFULLY CREATED!"});
+
+        
+
+        res.render('login', {error: "USER SUCCESSFULLY CREATED!"});
+        
+            
     }  catch (error) {
         console.log (error)
         res.status(400).send(error.message);
