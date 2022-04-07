@@ -1,4 +1,5 @@
 const db = require('../startup/database'); 
+const { v4: uuidv4 } = require('uuid');
 const {doc, updateDoc} = require('firebase/firestore');
 const {getStorage, ref, uploadBytesResumable, getDownloadURL} =require("firebase/storage"); 
 
@@ -14,22 +15,18 @@ const addImage = async (req, res, next) => {
         contentType: 'image/jpeg'
       };
     
-    console.log("recieved "+ res.locals.fileName);
 
-    const file = '../public/images/'+ res.locals.fileName;
+    const storageRef = ref(storage, 'images/'+ `${uuidv4()}.png`);
 
-    const storageRef = ref(storage, 'images/'+ res.locals.fileName);
-
-    const uploadTask = uploadBytesResumable(storageRef, req.file.buffer, metadata);
-
-    uploadTask.on('state_changed', (snapshot) => {}, () => {
-        getDownloadURL(uploadTask.snapshot.ref).then((url) => {
+    const uploadTask = uploadBytesResumable(storageRef, req.file.buffer, metadata).then((snapshot) => {
+        getDownloadURL(storageRef).then((url) => {
             updateDoc(doc(db, "users", req.body.id),{
-                                pic: url  
-                                });
+                pic:url 
+            });
         });
-    }
-    );
+    });
+                    
+                
 
     res.render('login', {error: "USER SUCCESSFULLY CREATED!"});
     
