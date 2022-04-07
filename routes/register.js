@@ -1,14 +1,15 @@
 const express = require('express');
-const multer = require('multer');
-const {addImage} = require('./addImage');
 const router = express.Router();
 const bodyParser = require('body-parser');
-const { registerUser } = require('./registerUser');
+const multer = require('multer');
+const {registerUser } = require('./registerUser');
+const {addImage} = require('./addImage');
+const {uploadImage} = require('../helpers/uploadImage');
 global.XMLHttpRequest = require("xhr2"); 
 
 const storage = multer.memoryStorage();
 
-const upload = multer({ storage: storage }).single('file');
+const upload = multer({ storage: storage }).single('image');
 
 router.use(express.json());
 
@@ -22,7 +23,7 @@ router.get('/', async (req,res) => {
       res.render('register');
 });
 
-router.post('/add', upload, registerUser, addImage);
+router.post('/add', upload, uploadImage, registerUser, addImage);
 
 
 module.exports = router;

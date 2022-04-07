@@ -12,12 +12,4 @@ router.get('/', async (req,res) => {
     res.render('forum');
 });
 
-router.post('/upload', upload.single('file'), addImage, async (req,res)=>{
-  
-  
-
-
-    res.render('forum');
-});
-
 module.exports = router;

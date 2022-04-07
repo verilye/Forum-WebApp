@@ -8,7 +8,7 @@ div
       form(method='POST')
         input(type='text' name='subject' placeholder='Subject' required='')
         input(type='text' name='msg-text' placeholder='Message text' required='')
-        input(type="file" id="photo")
+        input(type="hidden" name='Content-Type'id="photo" value ='image/jpeg')
         button.photo-button(onclick="uploadImage()") Upload Image
         input.submit-button(type='submit' value='Submit')
   .message-display-area
