@@ -15,10 +15,12 @@ const addImage = async (req, res, next) => {
         contentType: 'image/jpeg'
       };
     
+    filename = `${uuidv4()}.png`;
 
-    const storageRef = ref(storage, 'images/'+ `${uuidv4()}.png`);
+    const storageRef = ref(storage, 'images/'+filename );
 
     const uploadTask = uploadBytesResumable(storageRef, req.file.buffer, metadata).then((snapshot) => {
+        console.log(snapshot.name);
         getDownloadURL(storageRef).then((url) => {
             updateDoc(doc(db, "users", req.body.id),{
                 pic:url 

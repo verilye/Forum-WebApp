@@ -1,15 +1,23 @@
-div
-  .user-area
-    a(href='/forum') #{user_name}
-    - var url = #{pic};
-    img(src=url)
-  .message-posting-area
-    .forum-post-form
-      form(method='POST')
-        input(type='text' name='subject' placeholder='Subject' required='')
-        input(type='text' name='msg-text' placeholder='Message text' required='')
-        input(type="hidden" name='Content-Type'id="photo" value ='image/jpeg')
-        button.photo-button(onclick="uploadImage()") Upload Image
-        input.submit-button(type='submit' value='Submit')
-  .message-display-area
-    p For message in messages display 10
+extends layout 
+
+block content 
+  div
+    .user-area
+      a(href='/user') Welcome  #{user_name}
+      a(class ="logout" href='/login') Logout   
+
+    .message-posting-area 
+      h1  Post a message here
+      .error-message #{error}
+      .forum-post-form
+        form(action='/forum/submit' method='POST' enctype="multipart/form-data")
+          input(type='text' name='subject' placeholder='Subject' required='')
+          input(type='text' name='msg' placeholder='Message' required='')
+          h2 Attach image
+          input(type="file" name="attachment")
+          input(type='submit' value='Submit')
+    .message-display-area
+      each val in messages ? messages :[]
+        div #{messages}
+
+    

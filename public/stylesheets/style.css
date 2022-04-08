@@ -73,3 +73,47 @@
     width: 100%;
     height: 100px;
 }
+
+/* REGISTER SECTION */
+
+.user-area{
+
+    position: absolute;
+    margin: 0;
+    width: 100%;
+    height: 5%;
+    background-color: red;
+    font-size: 40px;
+}
+
+.message-posting-area{
+    position: absolute;
+    margin: 0;
+    top:5%;
+    width: 100%;
+    height: 30%;
+    background-color: blue;
+
+}
+
+.message-display-area{
+
+    position: absolute;
+    top:30%;
+    margin: 0;
+    width: 100%;
+    height: 70%;
+    background-color: green;
+}
+.logout{
+    position: absolute;
+    left:90%
+}
+
+
+/* Message posting area */
+.li{
+    margin:50px;
+    background-color:yellow;
+
+}
