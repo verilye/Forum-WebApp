@@ -4,7 +4,7 @@ block content
   div
     .user-area
       a(href='/user') Welcome  #{user_name}
-      a(class ="logout" href='/login') Logout   
+      a(href='/') Logout   
 
     .message-posting-area 
       h1  Post a message here
@@ -17,7 +17,7 @@ block content
           input(type="file" name="attachment")
           input(type='submit' value='Submit')
     .message-display-area
-      each val in messages ? messages :[]
-        div #{messages}
+      each subject in messages ? messages :[]
+          div | #{subject} <br/>
 
     

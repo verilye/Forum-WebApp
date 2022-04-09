@@ -1,0 +1,10 @@
+extends layout 
+
+block content 
+  div
+    h4 Change password
+    #{error}
+    form(action='/user/change' method='POST')
+        input(type='text' name='new' required='' placeholder='new password')
+        input(type='text' name='old' required='' placeholder='old password')
+        input.change-button(type='submit' value='Change') 

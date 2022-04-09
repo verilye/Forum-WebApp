@@ -12,5 +12,5 @@ module.exports = function(app){
     app.use('/', login);
     app.use('/register', register);
     app.use('/forum', forum);
-    // app.use('/user', user);
+    app.use('/user', user);
 }

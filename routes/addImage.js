@@ -3,7 +3,10 @@ const { v4: uuidv4 } = require('uuid');
 const {doc, updateDoc} = require('firebase/firestore');
 const {getStorage, ref, uploadBytesResumable, getDownloadURL} =require("firebase/storage"); 
 
-global.XMLHttpRequest = require("xhr2"); 
+
+
+
+// Make it a universal middleware so you can use it it to upload an image in any context
 
 
 

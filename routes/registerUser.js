@@ -1,12 +1,14 @@
-const firebase = require('../startup/database'); 
-const {getStorage, ref, uploadString} =require("firebase/storage"); 
-const storage = getStorage();
-const storageRef = ref(storage); 
-const folderRef = ref(storageRef, 'images');
-global.XMLHttpRequest = require("xhr2"); 
+//    THIS MODULE SHOULD BE IN THE MAIN ROUTE FILE
+//    AS USUAL ADD VALIDATION
+
+
+
+
+
+
+
 const db = require('../startup/database'); 
 const {doc, getDoc, getDocs , where, query, collection, setDoc} = require('firebase/firestore');
-const {Storage} = require('@google-cloud/storage');
 
 const registerUser = async (req, res, next) => {
       
