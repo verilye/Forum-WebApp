@@ -13,8 +13,8 @@ app.set("view engine", "pug");
 
 
 //To add -
-// salt and has passwords
-// error handling and loggin (WINSTON)
+// salt and hash passwords
+// error handling and logging (WINSTON)
 // unit testing (JEST)
 // environment variables
 // secret keys

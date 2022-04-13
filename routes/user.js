@@ -1,19 +1,3 @@
-
-
-
-
-//On load, display name and the last few posts made by the user
-
-
-
-
-
-
-
-
-
-
-
 const db = require('../startup/database'); 
 const express = require('express');
 const {doc, getDoc } = require('firebase/firestore');
@@ -23,6 +7,10 @@ router.use(express.json());
 router.use(bodyParser.urlencoded({
     extended: true
   }));
+
+
+//On load, display name and the last few posts made by the user
+
 
 router.get('/', async (req,res) => {
 

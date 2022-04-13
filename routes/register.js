@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const multer = require('multer');
 const {registerUser } = require('./registerUser');
-const {addImage} = require('./addImage');
+const {addImage} = require('../middleware/addImage');
 
 const storage = multer.memoryStorage();
 
