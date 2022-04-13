@@ -6,7 +6,7 @@ const app = express();
 app.use(express.static(__dirname));
 
 app.use(express.json());
-app.use(express.urlencoded());
+app.use(express.urlencoded({extended:true}));
 
 app.set('views', path.join(__dirname, 'views'));
 app.set("view engine", "pug");
@@ -19,11 +19,10 @@ app.set("view engine", "pug");
 // environment variables
 // secret keys
 // jwt authentication
-// implement models, views and controllers
+// implement views and controllers
 // startup classes - check for jwt, clean up database init, 
 // implement error module in routes file
-// implement front and and back end validation
-// change view engine from pug to ecjs
+// implement front end validation
 
 require('./startup/database');
 require('./startup/routes')(app);

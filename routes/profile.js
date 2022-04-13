@@ -4,17 +4,12 @@ const {doc, getDoc } = require('firebase/firestore');
 const router = express.Router();
 router.use(express.json());
 
-router.use(bodyParser.urlencoded({
-    extended: true
-  }));
-
-
 //On load, display name and the last few posts made by the user
 
 
 router.get('/', async (req,res) => {
 
-    res.render('user');
+    res.render('profile');
     
   });
 
@@ -34,10 +29,10 @@ router.post('/change', async (req,res) => {
         updateDoc(doc(db, "posts", post),{
             password:req.body.old
             })
-        res.render('user', {error:"Password Changed"});
+        res.render('profile', {error:"Password Changed"});
     
     }else{
-        res.render('user', {error:"Incorrect Paswword"});
+        res.render('profile', {error:"Incorrect Paswword"});
     }
     
 });

@@ -32,9 +32,9 @@ router.get('/login', async (req,res)=>{
     res.render('login', {error: "ID or password is invalid"});
 
   }else if (docSnap.data().password != req.body.password){
-  
+
     res.render('login', {error: "ID or password is invalid"});
-  
+
   }else{
 
     res.render('forum', {user_name : req.body.id});

@@ -25,12 +25,10 @@ router.get('/', async (req,res) => {
             messages.push(JSON.stringify(doc.data()));
 
         });
-        //console.log(posts);
-        fs.readFile('id.txt', 'utf8' , (err, data) => {
-
-            const removed = data.replaceAll('"', '');
-            res.render('forum', {messages:messages});
-        });
+       
+       
+        res.render('forum', {messages:messages});
+        
 
     }catch (err) {
         console.log(err);
@@ -42,33 +40,8 @@ router.get('/', async (req,res) => {
 
 
 
-router.post('/submit', upload.single('attachment'), async (req,res) => {
+router.post('/submit', async (req,res) => {
 
-    
-
-   const storage = getStorage();
-
-    const metadata = {
-        contentType: 'image/jpeg'
-    };
-    
-    filename = `${uuidv4()}.png`;
-    post = `${uuidv4()}`;
-
-
-    const storageRef = ref(storage, 'images/'+filename );
-
-    fs.readFile('id.txt', 'utf8' , (err, data) => {
-
-        const removed = data.replaceAll('"', '');
-
-        setDoc(doc(db, "posts", post),{
-            user:removed,
-            subject:req.body.subject,
-            msg: req.body.msg,
-            date: new Date()
-            })
-    });
         const messages =[];
 
         const postsRef =collection(db, "posts");
