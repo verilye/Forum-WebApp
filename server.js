@@ -24,8 +24,8 @@ app.set("view engine", "pug");
 // implement error module in routes file
 // implement front end validation
 
-require('./startup/database');
-require('./startup/routes')(app);
+require('./_config/database');
+require('./_config/routes')(app);
 
 
 const PORT = process.env.PORT || 8080;

@@ -1,8 +1,8 @@
 const express = require('express');
-const login = require('../routes/login');
-const register = require('../routes/register');
-const forum = require('../routes/forum');
-const profile = require('../routes/profile');
+const login = require('../login/login');
+const register = require('../register/register');
+const forum = require('../forum/forum');
+const profile = require('../profile/profile');
 
 
 module.exports = function(app){

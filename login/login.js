@@ -1,9 +1,7 @@
-const db = require('../startup/database'); 
+const db = require('../_config/database'); 
 const express = require('express');
-const { getStorage, ref, getDownloadURL } = require("firebase/storage");
 const {doc, getDoc } = require('firebase/firestore');
 const router = express.Router();
-const fs = require('fs');
 router.use(express.json());
 
 router.get('/', async (req,res) => {

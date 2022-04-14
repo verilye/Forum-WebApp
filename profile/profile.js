@@ -1,4 +1,4 @@
-const db = require('../startup/database'); 
+const db = require('../_config/database'); 
 const express = require('express');
 const {doc, getDoc } = require('firebase/firestore');
 const router = express.Router();

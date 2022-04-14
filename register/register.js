@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const multer = require('multer');
-const {addImage} = require('../middleware/addImage');
+const {addImage} = require('../_middleware/addImage');
 const {doc, getDoc, getDocs , where, query, collection, setDoc} = require('firebase/firestore');
 
 const storage = multer.memoryStorage();

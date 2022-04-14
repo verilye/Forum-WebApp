@@ -1,4 +1,4 @@
-const db = require('../startup/database'); 
+const db = require('../_config/database'); 
 const { v4: uuidv4 } = require('uuid');
 const {doc, updateDoc} = require('firebase/firestore');
 const {getStorage, ref, uploadBytesResumable, getDownloadURL} =require("firebase/storage"); 
