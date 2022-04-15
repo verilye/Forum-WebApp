@@ -1,6 +1,8 @@
-const db = require('../_config/database'); 
+const db = require('../_startup/database'); 
 const express = require('express');
 const {doc, getDoc } = require('firebase/firestore');
+const auth = require('../_middleware/auth');
+const { async } = require('@firebase/util');
 const router = express.Router();
 router.use(express.json());
 
@@ -14,30 +16,33 @@ router.get('/', async (req,res) => {
 // it into firestore query, returning the user with that id, making sure
 // password and username match
   
-router.get('/login', async (req,res)=>{
- 
-  const idRef = doc(db, 'users', req.body.id);
-  const docSnap = await getDoc(idRef);
+router.post('/login', async (req,res)=>{
 
-  // IMPLEMENT VALIDATION INSTEAD OF ENDLESS if else
-  // 
-  // AND COMPARE AGAINST HASHES AND SALTS NOT THE ACTUAL PASSWORD
+  try{
 
-  if (docSnap._document == null) {
-    res.render('login', {error: "ID or password is invalid"});
-  } else if(docSnap.data().user_name != req.body.user_name ){
+    const idRef = doc(db, 'users', req.body.id);
+    const docSnap = await getDoc(idRef);
 
-    res.render('login', {error: "ID or password is invalid"});
+    if (docSnap._document == null) 
+    {res.render('login', {error: "ID or password is invalid"});} 
+    
+    if(docSnap.data().user_name != req.body.user_name )
+    {res.render('login', {error: "ID or password is invalid"});}
+    
+    if (docSnap.data().password != req.body.password)
+    {res.render('login', {error: "ID or password is invalid"});}
 
-  }else if (docSnap.data().password != req.body.password){
+    const token = user.generateAuthToken();
 
-    res.render('login', {error: "ID or password is invalid"});
+    res.send(token);
 
-  }else{
+  }catch(ex){
 
-    res.render('forum', {user_name : req.body.id});
+      for (field in ex.errors){
+          console.log(ex.errors[field].message);
+      }
 
   }
-});
+}), auth, async (req,res)=>{res.redirect(forum)};
 
 module.exports = router;

@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const db = require('../_config/database'); 
+const db = require('../_startup/database'); 
 const { v4: uuidv4 } = require('uuid');
 const {doc, setDoc, orderBy, limit, collection, query, where, collectionGroup, getDocs, updateDoc} = require('firebase/firestore');
 const {getStorage, ref, uploadBytesResumable, getDownloadURL} =require("firebase/storage"); 

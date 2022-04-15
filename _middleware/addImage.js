@@ -1,10 +1,8 @@
-const db = require('../_config/database'); 
+const db = require('../_startup/database'); 
 const { v4: uuidv4 } = require('uuid');
 const {doc, updateDoc} = require('firebase/firestore');
 const {getStorage, ref, uploadBytesResumable, getDownloadURL} =require("firebase/storage"); 
-
-// Make it a universal middleware so you can use it it to upload an image in any context
-
+global.XMLHttpRequest = require("xhr2"); 
 
 const addImage = async (req, res, next) => {
 
@@ -27,11 +25,11 @@ const addImage = async (req, res, next) => {
         });
     });
                     
-                
+    console.log("Doneski")
 
-    res.render('login', {error: "USER SUCCESSFULLY CREATED!"});
-    
-}
+    next();
+};
+
 module.exports = {
     addImage
 }

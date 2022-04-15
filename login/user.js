@@ -1,3 +1,4 @@
+const jwt = require('jsonwebtoken');
 const Joi = require('joi');
 
 const User = Joi.object({
@@ -12,5 +13,11 @@ const User = Joi.object({
     
     repeat_password: Joi.ref('password'),
 })
+
+User.methods.generateAuthToken = function(){
+
+    return token = jwt.sign({_id:this.id}, config.get('jwtPrivateKey'));
+
+}
 
 exports.User = User;
