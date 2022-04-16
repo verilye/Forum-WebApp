@@ -19,7 +19,11 @@ router.get('/', async (req,res) => {
 
 // REGISTER USER
 
-router.post('/', upload, addUser, addImage);
+router.post('/', upload, addUser, addImage, async (req,res)=>{
+
+      res.render('login',{popup:"User created successfully!"} )
+
+});
 
     
 module.exports = router;

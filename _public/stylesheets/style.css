@@ -35,7 +35,7 @@
     height: 100px;
 }
 
-.error-message{
+.popup-message{
     color: red;
     position: absolute;
     top: 65%;

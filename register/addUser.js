@@ -21,17 +21,15 @@ const addUser = async (req, res, next) => {
                               user_name: req.body.user_name   
                         })
 
-                        console.log("User successfully created!");
-
                         next();
 
                   }else{
-                        res.render('register', {error: "Username already exists"});
+                        res.render('register', {popup: "Username already exists"});
             
                   }
 
             }else {
-                  res.render('register', {error: "ID already exists"});
+                  res.render('register', {popup: "ID already exists"});
             }
       }catch(err) { res.send(console.log(err))};
 }

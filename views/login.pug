@@ -6,12 +6,12 @@ block content
       h1 Simple Online Forum Application
       h3 With Google Firestore and Google Cloud Storage
     .login-form
-      form(action='/login' method='get')
+      form(action='/login' method='POST')
         input(type='text' name='id' required='' placeholder='ID')
         input(type='text' name='user_name' required='' placeholder='Username') 
         input(type='text' name='password' required='' placeholder='Password')
         input.login-button(type='submit' value='Login')
-    .error-message #{error}
+    .popup-message #{popup}
     .register-prompt
       a(href='/register') Dont have an account? Click here to register
     |   Connor Logan, s3768929

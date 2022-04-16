@@ -15,17 +15,18 @@ const addImage = async (req, res, next) => {
     filename = `${uuidv4()}.png`;
 
     const storageRef = ref(storage, 'images/'+filename );
-
-    uploadBytesResumable(storageRef, req.file.buffer, metadata).then((snapshot) => {
-        console.log(snapshot.name);
-        getDownloadURL(storageRef).then((url) => {
-            updateDoc(doc(db, "users", req.body.id),{
-                pic:url 
+    
+    try{
+        uploadBytesResumable(storageRef, req.file.buffer, metadata).then((snapshot) => {
+            getDownloadURL(storageRef).then((url) => {
+                updateDoc(doc(db, "users", req.body.id),{
+                    pic:url 
+                });
             });
         });
-    });
-                    
-    console.log("Doneski")
+    }catch(err){
+        
+    }
 
     next();
 };
