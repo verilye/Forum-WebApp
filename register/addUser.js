@@ -1,3 +1,4 @@
+const bcrypt = require('bcrypt');
 const db = require('../_startup/database'); 
 const {doc, getDoc, getDocs , where, query, collection, setDoc} = require('firebase/firestore');
 
@@ -15,9 +16,12 @@ const addUser = async (req, res, next) => {
 
                   if(user.size == 0){
 
+                        const salt = await bcrypt.genSalt(10);
+                        const hashedPassword = await bcrypt.hash(req.body.password, salt);
 
                         await setDoc(doc(db, "users", req.body.id),{
-                              password: req.body.password,
+                              salt:salt,
+                              password: hashedPassword,
                               user_name: req.body.user_name   
                         })
 
