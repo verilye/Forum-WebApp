@@ -22,9 +22,9 @@ app.listen(PORT, () => {
 
 
 // To add -
-// decode salted and hashed passwords
 // unit testing (JEST)
-// secret keys
-// check jwt authentication
+// login/out with jwt authentication
 // implement error module in routes file
-// implement front end validation
+// Display user details
+// Display forum posts
+// Make it look good

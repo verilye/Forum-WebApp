@@ -37,13 +37,13 @@ router.post('/login', access, async (req,res)=>{
 
   if(hashedPassword == pass){
       
-      const user = docSnap.data().user_name;
+    const user = docSnap.data().user_name;
 
-      const token = jwt.sign({user}, config.get('jwtPrivateKey'));
+    const token = jwt.sign({user}, config.get('jwtPrivateKey'));
 
-      res.locals.token = token;
+    res.cookie("token", token)
 
-      res.render('forum');
+    res.redirect('forum');
 
   }else{
 

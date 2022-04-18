@@ -4,37 +4,46 @@ const db = require('../_startup/database');
 const { v4: uuidv4 } = require('uuid');
 const {doc, setDoc, orderBy, limit, collection, query, where, collectionGroup, getDocs, updateDoc} = require('firebase/firestore');
 const {getStorage, ref, uploadBytesResumable, getDownloadURL} =require("firebase/storage"); 
-
+const jwt = require("jsonwebtoken");
+const cookieParser = require("cookie-parser");
+const config =require('config');
 
 //On load, display the last 10 posts and display the user image and name
 
+router.use(cookieParser());
+
 router.get('/', async (req,res) => {
 
-    try{
 
-        const messages =[];
+    const token = req.cookies.token;
 
-        const postsRef =collection(db, "posts");
-
-        const q = query(postsRef, orderBy('date', 'desc'), limit(10));
-
-        const querySnapshot = await getDocs(q);
-        
-        querySnapshot.forEach((doc) =>{
-
-            messages.push(JSON.stringify(doc.data()));
-
-        });
-       
-       
-        res.render('forum', {messages:messages});
-        
-
-    }catch (err) {
-        console.log(err);
-    }
+    if (!token) {
+		return res.status(401).end()
+	}
 
 
+    const messages =[];
+
+    const postsRef =collection(db, "posts");
+
+    const q = query(postsRef, orderBy('date', 'desc'), limit(10));
+
+    const querySnapshot = await getDocs(q);
+    
+    querySnapshot.forEach((doc) =>{
+
+        messages.push(JSON.stringify(doc.data())); 
+
+    });
+
+    payload = jwt.verify(token, config.get('jwtPrivateKey'));
+
+    console.log(payload);
+    
+    res.render('forum', {
+        popup:payload.user,
+        messages:messages
+    });
 });
 
 
