@@ -1,4 +1,3 @@
-const error = require('../_middleware/error');
 const login = require('../login/login');
 const register = require('../register/register');
 const forum = require('../forum/forum');
@@ -13,6 +12,5 @@ module.exports = function(app){
     app.use('/forum', forum);
     app.use('/profile', profile);
     app.use('/auth', auth);
-    app.use(error);
     
 }

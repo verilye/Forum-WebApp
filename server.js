@@ -22,12 +22,9 @@ app.listen(PORT, () => {
 
 
 // To add -
-// hook processes up to sequential routes etc. login -> auth -> render forum page 
-// salt and hash passwords
-// error handling
+// decode salted and hashed passwords
 // unit testing (JEST)
 // secret keys
-// jwt authentication
-// startup classes - check for jwt, clean up database init 
+// check jwt authentication
 // implement error module in routes file
 // implement front end validation
