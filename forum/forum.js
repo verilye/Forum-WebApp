@@ -38,13 +38,19 @@ router.get('/', async (req,res) => {
     
     querySnapshot.forEach((doc) =>{
 
-        messages.push(JSON.stringify(doc.data())); 
+
+        const message ={
+            msg:doc.data().msg,
+            subject:doc.data().subject,
+            postedBy:doc.data().postedBy,
+            pic:doc.data().pic
+        }
+
+        messages.push(message); 
 
     });
 
-
     payload = jwt.verify(token, config.get('jwtPrivateKey'));
-
     
     res.render('forum', {
         user_name:payload.user,

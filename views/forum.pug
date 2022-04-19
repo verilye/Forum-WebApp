@@ -1,5 +1,7 @@
 extends layout 
 
+include mixins/post
+
 block content 
   .navbar 
     .user-area
@@ -17,6 +19,11 @@ block content
           h2 Attach image
           input(type="file" name="image")
           input(type='submit' value='Submit')
-    .message-display-area
-      each subject in messages ? messages :[]
-        div | #{subject} <br/>
+    #post-list.posts 
+      each message in messages 
+        +post(message ['subject'],message ['msg'],message['pic'], message ['postedBy'])
+
+     
+      //- -var messages = #{messages}
+      //- each subject in messages ? messages :[]
+      //-   div | #{subject} <br/>
