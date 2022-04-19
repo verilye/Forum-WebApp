@@ -76,22 +76,37 @@
 
 /* REGISTER SECTION */
 
-.user-area{
-
+.navbar{
+    
     position: absolute;
     margin: 0;
     width: 100%;
-    height: 5%;
+    height: 10%;
     background-color: red;
     font-size: 40px;
+    
+}
+
+.user-area{
+    
+    padding-top:15px;
+    padding-left:15px;
+    float:left;
+}
+
+
+.logout{
+    padding-top:15px;
+    float:right;
 }
 
 .message-posting-area{
     position: absolute;
     margin: 0;
-    top:5%;
+    top:10%;
     width: 100%;
     height: 30%;
+    padding-left:15px;
     background-color: blue;
 
 }
@@ -99,7 +114,7 @@
 .message-display-area{
 
     position: absolute;
-    top:30%;
+    top:40%;
     margin: 0;
     width: 100%;
     height: 70%;

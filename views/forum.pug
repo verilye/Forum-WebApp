@@ -1,11 +1,12 @@
 extends layout 
 
 block content 
-  div
+  .navbar 
     .user-area
-      a(href='/user') Welcome  #{user_name}
-      a(href='/') Logout   
-
+      a(href='/user' style="text-decoration: none") Welcome  #{user_name}
+    .logout
+      a(href='/' style="text-decoration: none") Logout   
+  div 
     .message-posting-area 
       h1  Post a message here
       .popup-message #{popup}
@@ -14,10 +15,8 @@ block content
           input(type='text' name='subject' placeholder='Subject' required='')
           input(type='text' name='msg' placeholder='Message' required='')
           h2 Attach image
-          input(type="file" name="attachment")
+          input(type="file" name="image")
           input(type='submit' value='Submit')
     .message-display-area
       each subject in messages ? messages :[]
-          div | #{subject} <br/>
-
-    
+        div | #{subject} <br/>

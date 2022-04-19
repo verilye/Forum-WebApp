@@ -23,7 +23,7 @@ app.listen(PORT, () => {
 
 // To add -
 // unit testing (JEST)
-// login/out with jwt authentication
+// JWT MIDDLEWARE
 // implement error module in routes file
 // Display user details
 // Display forum posts
