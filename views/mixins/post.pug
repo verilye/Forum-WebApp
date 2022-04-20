@@ -1,10 +1,11 @@
 mixin post(msg , subject, pic, postedBy)
     .post-body
-        h6
-        img(pic)
-        h2.text-body=subject 
-        p.text-body=msg 
-        p.text-body="posted by " + postedBy
+        .profile-pic 
+            img(src=pic)
+        .post-content 
+            h2.text-body=subject 
+            p.text-body=msg 
+            p.text-body="posted by " + postedBy
         
 
     //- h2= subject 

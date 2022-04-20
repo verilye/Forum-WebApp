@@ -22,9 +22,8 @@ app.listen(PORT, () => {
 
 
 // To add -
-// unit testing (JEST)
 // JWT MIDDLEWARE
-// implement error module in routes file
-// Display user details
-// Display forum posts
-// Make it look good
+// Error middleware
+// Display user details in user profile
+// Paginate all post data
+// Delete image on post or profile delete

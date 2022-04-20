@@ -2,27 +2,32 @@ extends layout
 
 include mixins/post
 
-block content 
-  .navbar 
-    .user-area
-      a(href='/user' style="text-decoration: none") Welcome  #{user_name}
-    .logout
-      a(href='/' style="text-decoration: none") Logout   
-  div 
-    .message-posting-area 
-      h1  Post a message here
-      .popup-message #{popup}
-      .forum-post-form
-        form(action='/forum/submit' method='POST' enctype="multipart/form-data")
-          input(type='text' name='subject' placeholder='Subject' required='')
-          input(type='text' name='msg' placeholder='Message' required='')
-          h2 Attach image
-          input(type="file" name="image")
-          input(type='submit' value='Submit')
-    .message-display-area 
-      #post-list.posts 
-        each message in messages 
-          +post(message ['subject'],message ['msg'],message['pic'], message ['postedBy'])
+block content
+  .forum 
+    .navbar 
+      .user-area
+        a(href='/user' style="text-decoration: none") Welcome  #{user_name}
+      .logout
+        a(href='/' style="text-decoration: none") Logout   
+    div 
+      .message-posting-area 
+        h1  Post a message here
+        .popup-message #{popup}
+        .forum-post-form
+          form(action='/forum/submit' method='POST' enctype="multipart/form-data")
+            input(type='text' name='subject' placeholder='Subject' required='')
+            input(type='text' name='msg' placeholder='Message' required='')
+            h2 Attach image
+            input(type="file" name="image")
+            input(type='submit' value='Submit')
+      .message-display-area
+        form(action='/forum' method='get')
+          button(name='previous' value=messages[0]) Older 
+        form(action='/forum' method='get')
+          button(name='next' value=messages[messages.length-1]) Newer    
+        #post-list.posts 
+          each message in messages 
+            +post(message ['subject'],message ['msg'],message['pic'], message ['postedBy'])
 
      
       //- -var messages = #{messages}
