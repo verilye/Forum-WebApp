@@ -1,5 +1,10 @@
 /* All sections labelled as *NAME* SECTION, ctrl+f to find */
 
+
+body{
+    background-color: gray;
+}
+
 /* LOGIN SECTION */
 
 .title{
@@ -129,5 +134,17 @@
 /* Message posting area */
 
 .post-body{
+    margin:1%;
+    padding:1px;
+    width: 80%;
+    background:white ;
+    border-radius: 25px;
     
+}
+
+.text-body{
+    
+    
+    margin-bottom: 10px;
+    padding-left: 10%;
 }

@@ -2,9 +2,10 @@ mixin post(msg , subject, pic, postedBy)
     .post-body
         h6
         img(pic)
-        a.text-body(href='#' data-toggle='collapse' data-target='.forum-content')=subject 
-        p.text-secondary=msg 
-        p.text-secondary=postedBy 
+        h2.text-body=subject 
+        p.text-body=msg 
+        p.text-body="posted by " + postedBy
+        
 
     //- h2= subject 
     //- img(pic)
